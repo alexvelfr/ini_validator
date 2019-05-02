@@ -1,18 +1,19 @@
 import sys
-from configparser import RawConfigParser, MissingSectionHeaderError, ParsingError
+from configparser import RawConfigParser, MissingSectionHeaderError, ParsingError, DuplicateOptionError, DuplicateSectionError
 
 
 def validate(file):
     try:
         f = open(file, 'r')
         data = f.read()
+        f.close()
     except:
         print 'File not found'
         exit(1)
     conf_parser = RawConfigParser()
     try:
         conf_parser.read_string(unicode(data))
-    except (MissingSectionHeaderError, ParsingError):
+    except (MissingSectionHeaderError, ParsingError,DuplicateOptionError, DuplicateSectionError):
         print 'Parse error. File not valid'
         exit(1)
     exit(0)
