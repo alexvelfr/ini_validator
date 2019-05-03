@@ -21,7 +21,10 @@ def validate(file):
 
 def validate2(file):
     excepted_symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '/', '?', '\\', '"', '\'']
-    f = open(file, 'r')
+    try:
+        f = open(file, 'r')
+    except:
+        sys.exit(1)
     valid = True
     for line in f.readlines():
         arr_line = line.strip('\n, ').split('=')
